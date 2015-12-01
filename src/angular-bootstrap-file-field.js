@@ -12,6 +12,10 @@ angular.module('bootstrap.fileField',[])
   return {
     require:'ngModel',
     restrict: 'E',
+    scope: {
+	ngModel: '=',
+	preview: '='
+    },
     link: function (scope, element, attrs, ngModel) {
         //set default bootstrap class
         if(!attrs.class && !attrs.ngClass){
@@ -27,7 +31,7 @@ angular.module('bootstrap.fileField',[])
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     scope.$evalAsync(function(){
-                        scope[attrs.preview]=e.target.result;
+                        scope.preview=e.target.result;
                     });
                 };
                 reader.readAsDataURL(event.target.files[0]);
